@@ -38,6 +38,16 @@ area({rectangle,X,Y}) ->
 area({circle,R}) ->	
 	 math:pi() * math:pow(R,2).
 	 
+%% temperature conversion 
+%% using formula 5(F-32) = 9C
+
+%%temperature_convert({c,C}) -> 
+%%    F = 9*C/5+32,
+%%    {f,F};
+%%temperature_convert({f,F}) -> 
+%%    C = F-32*5/9,
+%%    {c,C}
+	 
 perimeter(In) ->
     case In of
         {rectangle,X,Y} ->
