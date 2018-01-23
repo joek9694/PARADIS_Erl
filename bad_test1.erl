@@ -12,6 +12,18 @@
 
 -compile(export_all).
 
+%test_all() ->
+%    10 = double(5),
+%    100 = area({square,10}),
+%    44 = perimeter({square,10}),
+%    // melting point of sulfur 
+%    {f,212} = temperatuer_convert({c,100}), 
+%    120 = factorial(4),
+%    hooray.
+
+%factorial(N) -> N*factorial(N-1)
+%factorial(0) -> 1
+
 test1() ->
     io:format("double(2) is ~p~n",[double(2)]).
 	
