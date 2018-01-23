@@ -12,14 +12,15 @@
 
 -compile(export_all).
 
-%test_all() ->
-%    10 = double(5),
-%    100 = area({square,10}),
-%    44 = perimeter({square,10}),
-%    // melting point of sulfur 
+test_all() ->
+    10 = double(5),
+    100 = area({square,10}),
+    44 = perimeter({square,11}),
+	44 = perimeter({rectangle,11,11}),		%added serparate test for tuple with 3 elements
+%%    melting point of sulfur 
 %    {f,212} = temperatuer_convert({c,100}), 
-%    120 = factorial(4),
-%    hooray.
+    120 = factorial(5),
+    hooray.
 
 factorial(0) -> 1;
 factorial(N) when N > 0 -> N* factorial(N-1).
@@ -36,3 +37,13 @@ area({rectangle,X,Y}) ->
     X*Y;
 area({circle,R}) ->	
 	 math:pi() * math:pow(R,2).
+	 
+perimeter(In) ->
+    case In of
+        {rectangle,X,Y} ->
+             2*(X+Y);
+		{square,X} ->
+             4*X;
+        _ ->
+            io:format("cannot compute the area of ~p~n",In)
+			end.
