@@ -21,8 +21,8 @@
 %    120 = factorial(4),
 %    hooray.
 
-%factorial(N) -> N*factorial(N-1)
-%factorial(0) -> 1
+factorial(0) -> 1;
+factorial(N) when N > 0 -> N* factorial(N-1).
 
 test1() ->
     io:format("double(2) is ~p~n",[double(2)]).
