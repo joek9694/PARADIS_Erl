@@ -29,7 +29,32 @@ test_factorial() ->
 	1 = factorial(1),
 	24 = factorial(4),
 	{'EXIT', _Why} = (catch factorial(-1)),
-	{'EXIT', _Why2} = (catch factorial("")).	
+	{'EXIT', _Why2} = (catch factorial("")),
+	hooray.	
+	
+test_area() ->
+	100 = area({square, 10}),
+	6 = area({rectangle, 2, 3}),
+	-6 = area({rectangle, 2, -3}),
+	3.141592653589793 = area({circle, 1}),
+	12.566370614359172 = area({circle, 2}),
+	12.566370614359172 = area({circle, -2}),
+	0.0 = area({circle, 0}),
+	hooray.
+	
+test_perimeter() -> 
+	8 = perimeter({rectangle, 2, 2}),
+	10 = perimeter({rectangle, 2, 3}),
+	0 = perimeter({rectangle, -2, 2}),
+	-2 = perimeter({rectangle, 2, -3}),
+	-8 = perimeter({rectangle, -2, -2}),
+	
+	-8 = perimeter({square, -2}),
+	8 = perimeter({square, 2}),
+	
+	ok = perimeter("wrong input").
+
+	
 	
 %%	io:format("factorial(0) is ~p, and should be 1 ~n",[factorial(0)]),
 %%	io:format("factorial(1) is ~p, and should be 1 ~n",[factorial(1)]),
@@ -38,6 +63,13 @@ test_factorial() ->
 %%	{'EXIT', _Why2} = (catch factorial("")),
 %%	io:format("~p ~n",[Why]),
 %%	hooray.
+
+test_all2() ->
+	test_double(),
+	test_factorial(),
+	test_area(),
+	test_perimeter(),
+	hooray.
 
 test_all() ->
     10 = double(5),
@@ -68,6 +100,7 @@ area({square,X}) ->
     X*X;
 area({rectangle,X,Y}) ->
     X*Y;
+%%negative input 
 area({circle,R}) ->	
 	 math:pi() * math:pow(R,2).
 	
@@ -78,8 +111,8 @@ perimeter(InTupple) ->
              2*(X+Y);
 		{square,X} ->
              4*X;
-        _ ->
-            io:format("cannot compute the area of ~p~n",InTupple)
+        _ -> io:format("cannot compute the perimeter of ~p ~n", [InTupple])
+			
 	end.
 
 	
