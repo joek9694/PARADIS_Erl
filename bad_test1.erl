@@ -12,17 +12,14 @@
 
 %% --------- Tests.
 
+%% Run test_all() for all tests.
+
 test_double() ->
 	4 = double(2),
 	-4 = double(-2),
 	0 = double(0),
 	{'EXIT',_} = (catch double([])),
 	hooray.
-
-%%	io:format("double(2) is ~p, and should be 4 ~n",[double(2)]),
-%%	io:format("double(-2) is ~p, and should be -4 ~n",[double(-2)]),
-%%	io:format("double(0) is ~p, and should be 0 ~n",[double(0)]),
-%%	hooray.
 	
 test_factorial() ->
 	1 = factorial(0),
@@ -40,7 +37,10 @@ test_area() ->
 	12.566370614359172 = area({circle, 2}),
 	12.566370614359172 = area({circle, -2}),
 	0.0 = area({circle, 0}),
+	
+	{'EXIT', _Why} = (catch area({circle, "wrong input"})),
 	hooray.
+	
 	
 test_perimeter() -> 
 	8 = perimeter({rectangle, 2, 2}),
@@ -52,34 +52,32 @@ test_perimeter() ->
 	-8 = perimeter({square, -2}),
 	8 = perimeter({square, 2}),
 	
-	ok = perimeter("wrong input").
-
+	ok = perimeter("wrong input"),
+	hooray.
 	
 	
-%%	io:format("factorial(0) is ~p, and should be 1 ~n",[factorial(0)]),
-%%	io:format("factorial(1) is ~p, and should be 1 ~n",[factorial(1)]),
-%%	io:format("factorial(4) is ~p, and should be 24 ~n",[factorial(4)]),
-%%	{'EXIT', Why} = (catch factorial(-1)),
-%%	{'EXIT', _Why2} = (catch factorial("")),
-%%	io:format("~p ~n",[Why]),
-%%	hooray.
+%% Temperature conversions rounded to 2 decimalpoints.
+test_temperature_convert() ->
+	{c, 0.0} = temperatuer_convert({f, 32.0}),
+	{c, -17.78} = temperatuer_convert({f, 0.0}),
+	{f, 68.00} = temperatuer_convert({c,20}),
+	{c, 20.0} = temperatuer_convert({f,68.0}),
+	{f, -459.67} = temperatuer_convert({c, -273.15}),
+	{c, -273.15} = temperatuer_convert({f, -459.67}),
+	
+	{'EXIT', _Why} = (catch temperatuer_convert({f, "wrong input"})),
+	
+	hooray.
 
-test_all2() ->
+
+test_all() ->
 	test_double(),
 	test_factorial(),
 	test_area(),
 	test_perimeter(),
+	test_temperature_convert(),
 	hooray.
 
-test_all() ->
-    10 = double(5),
-    100 = area({square,10}),
-    44 = perimeter({square,11}),
-	44 = perimeter({rectangle,11,11}),		%added serparate test for tuple with 3 elements
-%%    melting point of sulfur 
-    {f,212.0} = temperatuer_convert({c,100.0}), 
-    120 = factorial(5),
-    hooray.
 
 	
 %% --------- Random mathematical equations.
@@ -95,12 +93,14 @@ factorial(N) when N > 0 ->
 
 	
 %% --------- Calculations on geometric figures.
-	
+
+%% accepts negative input
+
+
 area({square,X}) ->
     X*X;
 area({rectangle,X,Y}) ->
-    X*Y;
-%%negative input 
+    X*Y; 
 area({circle,R}) ->	
 	 math:pi() * math:pow(R,2).
 	
@@ -117,6 +117,7 @@ perimeter(InTupple) ->
 
 	
 %% ---------- temperature conversion.
+
 %%(without guards for below absolute zero conversions,
 %% since there (since 2013) are quantum gas with measured 
 %% sub-absolute-zero temperatures.
@@ -124,8 +125,10 @@ perimeter(InTupple) ->
 
 temperatuer_convert({c,C}) ->
 	F = (9*C) /5 + 32,
-	{f,F};
+	Farenheit = list_to_float(float_to_list(F,[{decimals, 2}])),	%% 2 decimal points
+	{f,Farenheit};
 
 temperatuer_convert({f,F}) ->
 	C = 5 *(F -32) /9,
-	{c,C}.
+	Celsius = list_to_float(float_to_list(C,[{decimals, 2}])),		%% 2 decimal points
+	{c,Celsius}.
