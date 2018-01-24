@@ -94,7 +94,7 @@ factorial(N) when N > 0 ->
 	
 %% --------- Calculations on geometric figures.
 
-%% accepts negative input
+%% accepts negative numbers as input
 
 
 area({square,X}) ->
@@ -121,14 +121,15 @@ perimeter(InTupple) ->
 %%(without guards for below absolute zero conversions,
 %% since there (since 2013) are quantum gas with measured 
 %% sub-absolute-zero temperatures.
-%% using formula 5(F-32) /9 = C
+%% Using formula 5(F-32) /9 = C, 
+%% presented using 2 decimal points.
 
 temperatuer_convert({c,C}) ->
 	F = (9*C) /5 + 32,
-	Farenheit = list_to_float(float_to_list(F,[{decimals, 2}])),	%% 2 decimal points
+	Farenheit = list_to_float(float_to_list(F,[{decimals, 2}])),
 	{f,Farenheit};
 
 temperatuer_convert({f,F}) ->
 	C = 5 *(F -32) /9,
-	Celsius = list_to_float(float_to_list(C,[{decimals, 2}])),		%% 2 decimal points
+	Celsius = list_to_float(float_to_list(C,[{decimals, 2}])),
 	{c,Celsius}.
