@@ -1,4 +1,4 @@
--module(bank).
+-module(bank_test1).
 -compile(export_all).
 
 test() ->
@@ -16,7 +16,11 @@ new() ->
 	
 balance(Pid) ->
     %% return the balance of the account
-    implement_this.
+									%% TEST
+	case Pid of
+		{bank_test1, X} ->
+			X
+	end.
 
 add(Pid, X) -> rpc(Pid, implement_this).
 
@@ -32,7 +36,7 @@ bank(X) ->
 	    From ! ok,
 	    bank(X+Y);
 	{From, {withdraw, Y}} ->
-	    implement_this
-	implement_this ->
-	    implement_this
+		implement_this;
+	{X ,{bank_test1, 0}} ->			%%TEST
+		{bank_test1, X +0}
     end.

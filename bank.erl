@@ -1,6 +1,13 @@
 -module(bank).
+
+%
+% Running test() should return hooray.
+%
+
 -compile(export_all).
 
+
+%%-------------- module tests.
 test() ->
     Pid = new(),
     ok = add(Pid, 10),
@@ -8,31 +15,64 @@ test() ->
     30 = balance(Pid),
     ok = withdraw(Pid, 15),
     15 = balance(Pid),
-    insufficient_funds = widthdraw(Pid, 20),
-    horray.
+    insufficient_funds = withdraw(Pid, 20),
+    hooray.
 
+	
+%%-------------- module.
+	
+%% Start a new process in which an infinite loop of recursive calls to bank/1
+%% holds the balance for your bank account.
 new() ->
     spawn(fun() -> bank(0) end).
-
+	
+	
+%% Checks the balance for the bank account in process Pid.
+%% Returns the balance when succesful.
 balance(Pid) ->
-    %% return the balance of the account
-    implement_this.
+    rpc(Pid, {balance}).
+	
 
-add(Pid, X) -> rpc(Pid, implement_this).
+%% Adds X to the current balance of bank account in process Pid. 
+%% Returns ok when succesful.
+add(Pid, X) -> 
+	rpc(Pid, {add, X}).
 
+	
+%% Withdraws X from the current balance of bank account in process Pid.
+%% Returns ok when succesful.	
 withdraw(Pid, X) ->
-    implement_this.
+	rpc(Pid, {withdraw, X}).
 
+	
+%% Acts as a middle man between the recursively stateful bank account in bank/1
+%% and the function calls within this module.
+%% Sends it's second argument as a message to it's specified first argument,
+%% and awaits a reply. The response is returned. 
 rpc(Pid, X) ->
-    implement_this.
+    Pid ! {self(), X},
+	
+	receive
+		Received ->
+			Received
+	end.
 
-bank(X) ->
+%%	Main recursive function of this module, where the state of the 
+%%  bank account is held. 
+%%  Answers received message and recursively calls itself with updated state.
+	
+bank(Balance) ->
     receive
 	{From, {add, Y}} ->
 	    From ! ok,
-	    bank(X+Y);
+	    bank(Balance+Y);
+	{From, {withdraw, Y}} when (Balance - Y) < 0->
+		From ! insufficient_funds,
+		bank(Balance);
 	{From, {withdraw, Y}} ->
-	    implement_this
-	implement_this ->
-	    implement_this
+		From ! ok,
+		bank(Balance -Y);
+	{From, {balance}} ->
+	    From ! Balance,
+		bank(Balance)
     end.

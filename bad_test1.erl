@@ -13,6 +13,8 @@
 %% --------- Tests.
 
 %% Run test_all() for all tests.
+test_double({_, X}) ->
+	X.
 
 test_double() ->
 	4 = double(2),
