@@ -1,5 +1,6 @@
--module(bad_test1).
+-module(bad_prog1).
 
+% By: JoEk9694, Johan Eklundh
 %
 %   This program had a number of errors, which should now be fixed.
 %   Running bad_prog1:test_all() should return the atom 'hooray'

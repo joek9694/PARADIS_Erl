@@ -1,5 +1,6 @@
 -module(bank).
 
+% By: JoEk9694, Johan Eklundh
 %
 % Running test() should return hooray.
 %
