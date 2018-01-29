@@ -1,4 +1,4 @@
--module(bad_prog1).
+-module(bad_test1). %% försök till lösning på bad_prog1
 
 % By: JoEk9694, Johan Eklundh
 %
