@@ -1,5 +1,13 @@
 -module(assign2).
 
+
+%%		FIX_ME
+%%
+%%
+%%	   Tests & comments		
+
+
+
 %-compile(export_all).
 -export([is_prime/1, seq/1, filter/2, rotate/2, all_primes/1]).	
 
