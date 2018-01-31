@@ -110,7 +110,7 @@ test_eval_minus() ->
 
 
 %---------------Tests for safe_eval()-------------
-%% Tests the try and the catch of the safe_eval funktion.
+%% Tests the try and the catch of the safe_eval function.
 test_safe_eval() ->
 	safe_eval({divide, 1, 0}),
 	safe_eval({divide, 1, 1}).
