@@ -9,7 +9,7 @@
 
 %----------------Tests----------------------------
 
-%% Runs all tests. Returns 'hooray' if succesful.
+%% Runs all tests. Returns 'hooray' if successful.
 all_tests() ->
 	test_eval(),
 	test_safe_eval(),
@@ -118,8 +118,8 @@ test_safe_eval() ->
 %------------Test for eval_process()--------------
 
 %% Takes as argument the arithmetic expression that are to be evaluated.
-%% Returns the reply(in the form: {ok, Arithmetic_Evaluation}) if succesful
-%% within 1 sec. If unsuccesful, an error message (in the form: {error, Stack_Trace})
+%% Returns the reply(in the form: {ok, Arithmetic_Evaluation}) if successful
+%% within 1 sec. If unsuccessful, an error message (in the form: {error, Stack_Trace})
 %% for all types of errors. Otherwise returns 'no_reply'.
 test_eval_process(F) ->
 	Pid2 = eval_process(),
@@ -155,7 +155,7 @@ eval({X,A,B}) when is_atom(X)->
 %%-------------------safe_eval-------------------
 
 %% Returns the value of the arithmetic evaluation in the form {ok, Val}
-%% if succesful. Otherwise returns stacktrace of error in the form 
+%% if successful. Otherwise returns stacktrace of error in the form 
 %% {error, StackTrace}
 
 safe_eval(X)->
