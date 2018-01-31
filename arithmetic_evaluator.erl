@@ -3,7 +3,6 @@
 %%
 %% Run all_tests() to go through all tests.
 
-%-compile(export_all).
 -export([eval/1, safe_eval/1, eval_process/0, all_tests/0,
 	test_eval_process/1, test_safe_eval/0 ,test_eval/0, test_eval_divide/0,
 	test_eval_times/0, test_eval_plus/0, test_eval_minus/0 ]).
