@@ -2,6 +2,7 @@
 
 -compile(export_all).
 
+%-----------------eval-----------------
 eval(X) when is_number(X) ->
 	X;
 	 
@@ -23,4 +24,15 @@ eval([H|T]) when is_atom(H) ->
 eval(E) when is_list(E) ->
 	[H1, H2|T] = E,
 	eval(T ++ [eval(H2)] ++[eval(H1)]).
+
+%%----------------safe_eval-----------------
 	
+safe_eval(X)->
+	try eval(X) of
+		Val ->
+		{ok, Val}
+	catch
+		_:_->
+		{error, erlang:get_stacktrace()}
+	end.
+
