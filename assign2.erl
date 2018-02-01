@@ -187,7 +187,7 @@ rotate(N, L) when is_integer(N), N == 0 ->	%% No rotations
 	L;
 
 rotate(N, L) when is_integer(N), N < 0, N > (length(L)* -1) ->
-	Num = length(L) + N,	%% positiveNum + negativeNum = lessThanPositiveNumber
+	Num = length(L) + N,	%% X + (-Y) = X - Y
 	rotate(Num, L);
 	
 rotate(N, L) when is_integer(N)-> 	%% Never rotate more than length of L -1. 	
