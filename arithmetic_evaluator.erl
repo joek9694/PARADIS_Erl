@@ -1,7 +1,8 @@
 -module(arithmetic_evaluator).
+
 %% By: Johan Eklundh, joek9694
 %%
-%% Run all_tests() to go through all tests.
+%% Run all_tests() to go through all tests in the arithmetic_evaluator module.
 
 -export([eval/1, safe_eval/1, eval_process/0, all_tests/0,
 	test_eval_process/1, test_safe_eval/0 ,test_eval/0, test_eval_divide/0,
