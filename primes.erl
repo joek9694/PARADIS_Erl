@@ -3,7 +3,7 @@
 %% By: Johan Eklundh, joek9694
 %%
 %% Run all_tests() to go through all tests related to 
-%% this module + list_operations.	
+%% this module (primes) and the module list_operations.	
 
 -import(list_operations, [seq/1, filter/2, rotate/2, test_seq/0, test_filter/0, 
 	test_rotate/0]).
