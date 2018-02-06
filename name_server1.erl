@@ -1,7 +1,7 @@
--module(name_server).
+-module(name_server1).
 -export([init/0, add/2, find/1, handle/2]).
 
--import(server1, [rpc/2]).  %% switch the first argument to server2 when u want to try server2...
+-import(server3, [rpc/2]).  %% Want another server? switch the first argument to the server u want.
 
 
 %------------------- client routines ------------------------------
