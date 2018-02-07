@@ -1,15 +1,21 @@
 -module(monitor).
--compile(export_all).
+-export([start/0]).
 
-start() ->
-    register(monitor_atom, spawn(fun() -> loop() end)),
-    Double_process = double:start(),
-    Ref = erlang:monitor(process, Double_process).
 
+start() -> 
+    MonitorPid = spawn(fun() -> monitor() end),
+    io:format("THE MONITORPID: ~p~n", [MonitorPid]).
+
+monitor() ->
+    double:start(),     %% double
+    monitor(process, double),
+    loop().
 
 loop()  ->
-    receive
-        {'DOWN', Ref, process, Double_process, Info} ->
-            io:format("Info is -------------> ~p~n",[Info]),
-        loop()
+    receive 
+        {'DOWN', Ref, process, Pid, Info} ->
+            io:format("Error: ~p~n", [Info]),
+            double:start(),
+            monitor(process, double),
+            loop()
     end.

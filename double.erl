@@ -7,6 +7,7 @@ start()  ->
 
 
 loop() ->
+    io:format("I am: ~p~n", [self()]),
     receive
         X ->
             try 
