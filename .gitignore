@@ -1,3 +1,5 @@
 #ignore all Erlang beam code
 *.beam
 #C:/Users/Johan/Desktop/SU/PARADIS/Erlang/assigns/PARADIS_Erl/student.erl
+#C:/Users/Johan/Desktop/SU/PARADIS/Erlang/assigns/PARADIS_Erl/pmap_try.erl
+
