@@ -5,23 +5,24 @@
 start(N, M) ->
     io:format("I am: ~p~n", [self()]),
     Pid = build(N, self()),
-    loop(M, Pid, 0),
+    
+    loop(M, Pid),
     exit(Pid, kill).
 
-loop(0, _Pid, X) ->
+loop(0, _Pid) ->
     receive
         {increment, X} ->
         X
     end;
 
-loop(M, Pid, X)  ->
+loop(M, Pid)  ->
     Pid ! {increment, 0},
     io:format("~p, skickar till: ~p~n", [self(),Pid]),
     receive
         {increment, X} ->
             Pid ! {increment, X +1},
             io:format("Hello3 ~n"),
-            loop(M -1, Pid, X +1)
+            loop(M -1, Pid)
     end.
 
 build(1, Host) ->
