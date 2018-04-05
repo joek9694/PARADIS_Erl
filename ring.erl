@@ -1,4 +1,9 @@
 -module(ring).
+
+%% By Johan Eklundh, JoEk9694
+%%
+%%
+
 -export([start/2]).
 
 

@@ -40,8 +40,8 @@ loop() ->
                 io:format("The result is: ~p~n", [Result]),
                 loop()
             catch
-                _:Why ->
-                erlang:error(Why)
+                _:Why -> erlang:error(Why)
+               
             end
 
     end.
